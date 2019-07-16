@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+</head>
+<body>
+    <form class="text-center border border-light p-5 bg-warning  " style = "margin: 20px 250px 250px 250px; " action="issuer.php" method="GET">
+
+    <p class="h4 mb-4">Create Offer</p>
+
+    <!-- Email -->
+    <input name="startd" class="textbox-n form-control mb-4" type="text" onfocus="(this.type='datetime-local')" placeholder="Enter Start-Date"> 
+    
+    <input name="endd" class="textbox-n form-control mb-4" type="text" onfocus="(this.type='datetime-local')" placeholder="Enter End-Date"> 
+    <input type="number" name="transcount" class="form-control mb-4" placeholder="Enter Transaction-Count">
+
+    <input type="number" name="mintransamt" class="form-control mb-4" placeholder="Enter Minimum Transaction Amount">
+    <input type="number" name="percentreward" class="form-control mb-4" placeholder="Enter Percentage of reward points available">
+    <input type="number" name="percentcash" class="form-control mb-4" placeholder="Enter Percentagecash points available">
+
+    
+
+   
+    <button class="btn btn-info btn-block my-4" type="submit">Launch Offer</button>
+
+    
+    
+</form>
+
+
+<form class="text-center border border-light p-5 bg-warning  " style = "margin: 0px 250px 250px 250px;" action="loyality.php" method="GET" >
+
+      <p class="h4 mb-4">Loyalty Points </p>
+
+    <input type="number" name="lrate" class="form-control mb-4" placeholder="Enter Loyal Rate">
+    <input type="number" name="mincount" class="form-control mb-4" placeholder="Enter Minimum Transaction Count">
+    <input type="number" name="minsum" class="form-control mb-4" placeholder="Enter Total Transaction Amount ">
+    <button class="btn btn-info btn-block my-4" type="submit">Find loyalty Points</button>
+  </form>
+
+
+</body>
+</html>
