@@ -56,35 +56,50 @@ There are 3 tables namely : user, scheme, trans.
 
 **user** table contains the customer information.
 
-###Code explanation : 
+### Code explanation : 
 When the user clicks the **Pay** button on the **customer.html** page:
-  if the user is new then his accno and reward are added in the user table as (accno,0). 0 means that the user has no reward in     his wallet.
+  if the user is new then his accno and reward are added in the user table as (accno,0). 0 means that the user has no reward in     his wallet. 
+  
   if the user is an old one then we do not add him in the user table.
   
 We one by one iterate through each scheme and for every scheme we follow the following operation:
+
   select all those transactions of the user with given account number with the transaction being performed within the activation period of the scheme. We are saving the count of such transactions in the variable **$size** and the sum of transaction amount in the variable **$sum**.
+  
  If the **$size**(count of transaction falling in the activation period that the user has done) is greater/equal to the **transcount**(minimum number of transaction that the user must do so get the offer/scheme) **AND** **$sum**(sum of all transactions amount falling in the activation period) is greater/equal to the **mintransamt**(minimum amount(summation across all the transactions) that must be transacted for the user to avail the offer) **AND** then:
  
+ 
  **$value1** means the maximum amount the user can redeem(from his earlier earned rewards) to pay for his transaction.
+ 
  **$value1** is in percentage. Reward points that the user redeems is **$value1** percentage of the total transaction amount(**$amount**).
+ 
 **$f['reward']** is the reward that the user has in his account from the earlier transaction.
+
 So if **$value1**>**$f['reward']** means that the user has less reward points than the points he can redeem.
+
   In this case, the user at max can spend the rewards points which he has in the account. Hence, at the end of transaction, user will be left with no rewards points because he has spend all the reward points that were present in his account.
+  
 So if **$value1**<**$f['reward']** means that the user has more reward points than the points he can redeem.
+
   In this case, we do not allow the user to spend all the rewards points that he has in his account. Rather, we only allow him to redeem **$value1** from his rewards points. Hence, at the end of transaction, the user will have **rewards points calculate from $f['reward']**-**$value1** left in his account.
+  
   
   So, suppose the transaction is of $100 and the user redeems $5 (5% reward points) then $amount = $100. $95 paid through user account and $5 from the reward points present in his account.
   
+  
   **percentcash** is then calculated on $95 which tells the amount of reward points that the user gets on this transaction.
+  
  **percentcash** is in percentage and the reward points that the user gets on this transaction are calculated as **percentcash** of the $95($amount-redempted amount(user paying $5 through reward points)).
+ 
  Another case inside **else if** if for a new user. Every new user also gets the benefit of the offer.
+ 
  **Note: On a given transaction both new and old user get reward points from only one offer even if the they are eligible for more that on offer.**
+ 
  **Note: If the user is eligible for more than one offer he will get the cashback(reward points calculated using percentcash) from that offer which gives him maximum cashback. $mx is used for this purpose and is a global variable**
+ 
  
 During transaction processing, the **user** table is updated because the user may have gotten some rewards points, so the reward points column for this user is updated to **$reward-$mn+$mx**. **$mn** is the amount user redeemed and paid some part of the amount using the redeemed amount. **$mx** is the cash back in the form of rewards points that the user has earned from one of the offers which gave him maximum cashback if he was eligible for more that one offer/scheme.
 
+
 Also, a new transaction row is added in the **trans** table. **'$accno','$dat','$amount'** where **$dat** is the datetime at which the transaction is made and **$amount** is the amount of the transaction(total amount without deduction from the redeemed amount).
  
-
- 
-  
