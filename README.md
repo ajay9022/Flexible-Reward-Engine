@@ -32,3 +32,19 @@ accumulates 1000 points then in order to redeem all of the minimum 5 separate tr
 accumulates 1000 points then in order to redeem all of the minimum 5 separate transactions have to be performed.
 
 The rules engine should have the capability to build any form of such rules by combining spends, frequency of spends, the volume of spend per period, loyalty in any combination. Definition of a new rule should not invite any new implementation or change of existing implementation.
+
+
+**Implementation**
+
+Issuerform.html - Frontend that allows the Card Issuer to create a Reward Scheme(Offer) at any time.
+
+The fields are: 
+1. Enter Start-Date : Date and time at which the offer will be activated.
+2. Enter End-Date : Date and time at which the offer will be de-activated.
+3. Enter Transaction-Count : Minimum total number of transaction that must be done by a user inorder to be eligible for the           scheme.
+4. Enter Minimum Transaction Amount - Minimum total transaction amount done in the entire during of the active offer(Summation of all the transaction amount).
+5. Enter Percentage of reward points available(percentage value should be entered without "%") - Percentage of the one transaction amount that some user wants to redeem from their wallet to pay for their transaction. for eg- If a user does a $100 transaction and the 5th field is filled with 5 then the user can pay $5(5% of $100) from the rewards points already available in his account. Hence $5 will be deducted/paid from the reward points he/she has already earned from the previous transactions and $95 will be deducted from his actual wallet/bank account.
+6. Enter Cash-back to receive in Percentage - Enter the Cash-back in terms of percentage of amount paid through wallet/bank account by the user in a certain transaction. Take the example in 5th point where the amount paid through wallet/bank account is $95. So, the cashback to be received is (x% of 95) where x is the value in the 6th field.
+
+On clicking the offer, the offer gets activated.
+
