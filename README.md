@@ -81,7 +81,9 @@ So if **$value1**<**$f['reward']** means that the user has more reward points th
  **Note: On a given transaction both new and old user get reward points from only one offer even if the they are eligible for more that on offer.**
  **Note: If the user is eligible for more than one offer he will get the cashback(reward points calculated using percentcash) from that offer which gives him maximum cashback. $mx is used for this purpose and is a global variable**
  
-During transaction processing, the **user** table is updated because the user may have gotten some rewards points, so the reward points column for this user is updated to **$reward-$mn+$mx**. **$mn** is the amount user redeemed and paid some part of the amount using the redeemed amount. **$mx** is the cash back in the form of rewards points that the user has earned from one of the offers which gave him maximum cashback if he was eligible for more that one offer/scheme
+During transaction processing, the **user** table is updated because the user may have gotten some rewards points, so the reward points column for this user is updated to **$reward-$mn+$mx**. **$mn** is the amount user redeemed and paid some part of the amount using the redeemed amount. **$mx** is the cash back in the form of rewards points that the user has earned from one of the offers which gave him maximum cashback if he was eligible for more that one offer/scheme.
+
+Also, a new transaction row is added in the **trans** table. **'$accno','$dat','$amount'** where **$dat** is the datetime at which the transaction is made and **$amount** is the amount of the transaction(total amount without deduction from the redeemed amount).
  
 
  
